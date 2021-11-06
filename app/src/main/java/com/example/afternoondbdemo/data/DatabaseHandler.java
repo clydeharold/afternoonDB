@@ -12,6 +12,9 @@ import com.example.afternoondbdemo.R;
 import com.example.afternoondbdemo.model.Product;
 import com.example.afternoondbdemo.util.Util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHandler extends SQLiteOpenHelper {
     public DatabaseHandler(Context context) {
         super(context, Util.DATABASE_NAME, null, Util.DATABASE_VERSION);
@@ -73,5 +76,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         }
         return product;
+    }
+
+    //Get All Products
+    public List<Product> getAllProducts() {
+        List<Product> productList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //Select All Contacts
+        String selectAll = "SELECT * FROM " + Util.TABLE_NAME;
+        Cursor cursor = db.rawQuery(selectAll, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                Product product = new Product();
+                product.setId(cursor.getInt(0));
+                product.setName(cursor.getString(1));
+                product.setPrice(cursor.getLong(2));
+                product.setQuantity(cursor.getInt(3));
+
+                //add product object to list
+
+                productList.add(product);
+            }while(cursor.moveToNext());
+        }
+
+        return productList;
+
     }
 }
