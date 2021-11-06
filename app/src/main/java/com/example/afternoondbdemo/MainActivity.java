@@ -11,6 +11,8 @@ import android.widget.Button;
 import com.example.afternoondbdemo.data.DatabaseHandler;
 import com.example.afternoondbdemo.model.Product;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     Button cmdAdd;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         cmdAdd.setOnClickListener(startAddProductActivity);
 
-      
+
     }
 
     View.OnClickListener startAddProductActivity = new View.OnClickListener() {
