@@ -8,6 +8,8 @@ import android.util.Log;
 import com.example.afternoondbdemo.data.DatabaseHandler;
 import com.example.afternoondbdemo.model.Product;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHandler db = new DatabaseHandler(MainActivity.this);
 
-      
+        Product prod = db.getProduct(1);
+        Log.d("Search-id", "PRODUCT: " + prod.getName());
+
+        List<Product> productList =  db.getAllProducts();
+
+        for(Product product: productList) {
+            Log.d("MainActivity", "On Create: " + product.getId() + "-" + product.getName());
+        }
+
     }
 }
