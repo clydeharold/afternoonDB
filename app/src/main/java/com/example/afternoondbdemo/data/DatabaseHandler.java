@@ -2,6 +2,7 @@ package com.example.afternoondbdemo.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -51,6 +52,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.d("db-add", "Successfully Added");
         db.close();
 
+    }
+
+    public Product getByIdProduct(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Product product = new Product();
+        Cursor cursor = db.query(Util.TABLE_NAME,
+                new String[] {Util.KEY_ID, Util.KEY_NAME, Util.KEY_PRICE, Util.KEY_QUANTITY},
+                Util.KEY_ID + " =? " + new String[]{String.valueOf(id)},
+                null, null, null, null, null);
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+
+
+        product.setId(cursor.getInt(0));
+        product.setName(cursor.getString(1));
+        product.setPrice(cursor.getLong(2));
+        product.setQuantity(cursor.getInt(3));
+
+        }
+        return product;
     }
 
 }
