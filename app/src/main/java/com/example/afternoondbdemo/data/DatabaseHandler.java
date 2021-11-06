@@ -1,12 +1,15 @@
 package com.example.afternoondbdemo.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.afternoondbdemo.R;
+import com.example.afternoondbdemo.model.Product;
 import com.example.afternoondbdemo.util.Util;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -33,5 +36,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //CRUD
 
+    //Add product
+
+    public void AddProduct(Product product) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(Util.KEY_NAME,product.getName());
+        values.put(Util.KEY_PRICE, product.getPrice());
+        values.put(Util.KEY_QUANTITY, product.getQuantity());
+
+        db.insert(Util.TABLE_NAME, null, values);
+        Log.d("db-add", "Successfully Added");
+        db.close();
+
+    }
 
 }
