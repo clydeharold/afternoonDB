@@ -104,4 +104,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return productList;
 
     }
+
+    //Update
+    public int updateProduct(Product product) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Util.KEY_NAME, product.getName());
+        values.put(Util.KEY_QUANTITY, product.getQuantity());
+        values.put(Util.KEY_PRICE, product.getPrice());
+
+        //update the row
+
+        Log.d("Update","Updated product");
+        return db.update(Util.TABLE_NAME, values, Util.KEY_ID + "=?",
+                new String[]{String.valueOf(product.getId())});
+    }
+
+
 }
