@@ -58,4 +58,6 @@ public class AddProductActivity extends AppCompatActivity {
         txtPrice = findViewById(R.id.txtProdPrice);
         txtQuantity = findViewById(R.id.txtProdQuan);
     }
+
+
 }
